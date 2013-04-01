@@ -19,6 +19,6 @@ setup(name='mimer',
       author_email='aaron.omullan@gmail.com',
       long_description="",
       packages=['mimer'],
-      package_data={'mimer': '*.json'},
+      package_data={'mimer': ['*.json']},
       include_package_data=True,
       **setup_kwargs)
