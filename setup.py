@@ -1,12 +1,6 @@
 #!/usr/bin/python
 
-
-try:
-    from setuptools import setup, Extension
-    has_setuptools = True
-except ImportError:
-    from distutils.core import setup, Extension
-    has_setuptools = False
+from setuptools import setup
 
 
 # Constants
@@ -25,4 +19,6 @@ setup(name='mimer',
       author_email='aaron.omullan@gmail.com',
       long_description="",
       packages=['mimer'],
+      package_data={'mimer': '*.json'},
+      include_package_data=True,
       **setup_kwargs)
