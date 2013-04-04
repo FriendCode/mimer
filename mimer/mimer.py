@@ -9,8 +9,12 @@ _DIRNAME = os.path.abspath(
     os.path.dirname(__file__)
 )
 _MIMETYPES_PATH = os.path.join(_DIRNAME, 'mimetypes.json')
+_EXCEPTIONS_PATH = os.path.join(_DIRNAME, 'exceptions.json')
 
 MIMETYPES = json.load(open(_MIMETYPES_PATH))
+
+# Extensions that are readable but aren't part of text/*
+EXCEPTIONS = json.load(open(_EXCEPTIONS_PATH))
 
 
 # Functions
@@ -41,9 +45,11 @@ is_application = partial(_is_type, 'application')
 
 def is_binary(url):
     """Says if a file should contain binary data or not"""
+    mime = mimetype(url)
     return all([
-        mimetype(url),
-        not(is_text(url))
+        mime,
+        not(is_text(url)),
+        not(mime in EXCEPTIONS)
     ])
 
 
